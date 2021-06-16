@@ -50,6 +50,7 @@ import (
 	"regexp"
 	"strconv"
 
+	"github.com/dustin/go-humanize"
 	"github.com/google/uuid"
 )
 
@@ -119,7 +120,14 @@ func validateInput(rules string, request string) string {
 
 func print(employees []Employee) {
 	for _, employee := range employees {
-		fmt.Printf("名前：%s\n生年月日：%s\n性別：%s\n給与：%d\n", employee.name, employee.birthday, employee.sex, employee.salary)
+		fmt.Printf(
+			"ID: %s\nName: %s\nBirthday: %s\nSex: %s\nSalary: ¥%s\n",
+			employee.id,
+			employee.name,
+			employee.birthday,
+			employee.sex,
+			humanize.Comma(int64(employee.salary)),
+		)
 	}
 }
 
