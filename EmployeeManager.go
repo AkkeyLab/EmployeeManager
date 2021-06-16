@@ -87,11 +87,12 @@ func menu(employees []Employee) {
 }
 
 func update(data *Employee) *Employee {
+	// https://murashun.jp/article/programming/regular-expression.html
 	data.name = validateInput("[^\\s　]", "名前")
 	data.birthday = validateInput("^[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$", "生年月日（YYYY/MM/DD）")
 	data.sex = validateInput("Male|Female", "性別（Male or Female）")
 	var salary int
-	salary, _ = strconv.Atoi(validateInput("[0-9]", "給与"))
+	salary, _ = strconv.Atoi(validateInput("^[^0][0-9]", "給与"))
 	data.salary = salary
 	return data
 }
