@@ -49,6 +49,8 @@ import (
 	"os"
 	"regexp"
 	"strconv"
+
+	"github.com/google/uuid"
 )
 
 type Employee struct {
@@ -70,7 +72,15 @@ func menu(employees []Employee) {
 	scanner.Scan()
 	switch scanner.Text() {
 	case "1":
-		array := append(employees, *update(new(Employee)))
+		newEmployee := new(Employee)
+		uuid, error := uuid.NewRandom()
+		if error != nil {
+			fmt.Print("例外が発生しました。最初からやり直してください\n")
+			menu(employees)
+			return
+		}
+		newEmployee.id = uuid.String()
+		array := append(employees, *update(newEmployee))
 		menu(array)
 	case "2":
 		print(employees)
