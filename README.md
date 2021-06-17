@@ -1,1 +1,1 @@
-# EmployeeManager
+# employee-manager-cli
